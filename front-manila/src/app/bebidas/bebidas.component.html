@@ -1,0 +1,96 @@
+<div class="wrap">
+  <div class="sec-t"><small>Bar</small><h1>Nuestras bebidas</h1><i></i></div>
+
+  <!-- mensaje cuando se agrega una bebida al pedido -->
+  <p class="aviso" role="status" *ngIf="mensajeAgregado">{{ mensajeAgregado }}</p>
+
+  <!-- buscadores (entidad Bebidas con ngModel) -->
+  <div class="bar">
+    <form>
+      <input type="text" name="nombre" [(ngModel)]="bebida.nombre" placeholder="Cóctel por nombre (ej. margarita)…">
+      <button type="button" class="btn" (click)="buscarPorNombre()">Buscar</button>
+    </form>
+
+    <form>
+      <input type="text" name="ingrediente" [(ngModel)]="bebida.ingrediente" placeholder="Ingrediente por nombre (ej. vodka)…">
+      <button type="button" class="btn" (click)="buscarPorIngrediente()">Buscar</button>
+    </form>
+  </div>
+
+  <!-- filtro por tipo -->
+  <div class="bar">
+    <form>
+      <span>Tipo</span>
+      <select name="tipo" [(ngModel)]="bebida.tipo">
+        <option value="">Elegir…</option>
+        <option value="Alcoholic">Alcohólica</option>
+        <option value="Non_Alcoholic">Sin alcohol</option>
+      </select>
+      <button type="button" class="btn" (click)="filtrarTipo()">Filtrar</button>
+    </form>
+  </div>
+
+  <!-- 1. las categorías -->
+  <div *ngIf="verCategorias">
+    <div class="grid">
+      <p class="vacio" *ngIf="cargandoCategorias">Cargando…</p>
+
+      <article class="card cat" *ngFor="let c of categorias" (click)="verCategoria(c.strCategory)">
+        <div class="ph">
+          <img [src]="c.imagen" [alt]="c.strCategory">
+        </div>
+        <div class="bd">
+          <h3>{{ c.strCategory }}</h3>
+          <div class="ft">
+            <button type="button" class="btn o">Ver bebidas</button>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+
+  <!-- 2. las bebidas de la búsqueda, del filtro o de la categoría -->
+  <div *ngIf="verBebidas">
+    <button type="button" class="btn o back" (click)="volver()">← Todas las categorías</button>
+
+    <!-- información del ingrediente (solo sale al buscar un ingrediente) -->
+    <div class="box info" *ngIf="ingredienteInfo">
+      <img [src]="ingredienteInfo.imagen" [alt]="ingredienteInfo.strIngredient">
+      <div>
+        <h3>{{ ingredienteInfo.strIngredient }}</h3>
+        <small>{{ ingredienteInfo.strType }}</small>
+        <p>{{ ingredienteInfo.strDescription }}</p>
+      </div>
+    </div>
+
+    <div class="sec-t sub"><h2>{{ titulo }}</h2></div>
+
+    <div class="grid">
+      <p class="vacio" *ngIf="cargando">Cargando…</p>
+
+      <article class="card" *ngFor="let b of lista">
+        <div class="ph">
+          <img [src]="b.foto" [alt]="b.nombre">
+          <span class="pr">{{ formato(b.precio) }}</span>
+        </div>
+        <div class="bd">
+          <small>{{ b.categoria }}</small>
+          <h3>{{ b.nombre }}</h3>
+          <ul class="chips">
+            <li *ngFor="let g of b.ingredientes">{{ g }}</li>
+          </ul>
+          <div class="ft">
+            <div class="qty">
+              <button type="button" (click)="menos(b)">−</button>
+              <b>{{ b.cantidad }}</b>
+              <button type="button" (click)="mas(b)">+</button>
+            </div>
+            <button type="button" class="btn" (click)="agregar(b)">Agregar</button>
+          </div>
+        </div>
+      </article>
+
+      <p class="vacio" *ngIf="sinResultados">No encontramos bebidas con esa búsqueda.</p>
+    </div>
+  </div>
+</div>

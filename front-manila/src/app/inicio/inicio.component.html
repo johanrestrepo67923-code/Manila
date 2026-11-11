@@ -1,0 +1,38 @@
+<!-- carrusel: las fotos vienen de la API de comidas -->
+<section class="hero">
+  <div class="s" *ngFor="let f of carrusel"><img [src]="f.foto" [alt]="f.nombre"></div>
+  <div class="tx">
+    <small>Manila</small>
+    <h1>MANILA</h1>
+    <q>“Donde cada plato es una experiencia”</q>
+    <div class="botones"><a routerLink="/comidas" class="btn">Ver la carta</a><a routerLink="/pedido" class="btn o">Hacer pedido</a></div>
+  </div>
+</section>
+
+<div class="wrap">
+  <section class="his">
+    <div>
+      <div class="sec-t historia-t"><small>⛩ Nuestra historia</small><h2>Tradición y modernidad en una misma mesa</h2></div>
+      <p>En nuestra hsitoria fue un restaurante que estaba iniciando pero no habia nadie que probara nuestros secretos platos y crecio gracias al secreto de la abuela.</p>
+      <p>Pero se dejo claro que ivamos a tener el restaurante en generacion engeracion para que prueben todos esta marvilla de platos y bebidas.</p>
+    </div>
+    <!-- mosaico: fotos de platos y bebidas que vienen de las APIs -->
+    <div class="mos">
+      <img *ngFor="let f of mosaico" [src]="f.foto" [alt]="f.nombre">
+    </div>
+  </section>
+
+  <div class="sec-t"><h2>Nuestras especialidades</h2><i></i></div>
+  <section class="est">
+    <article class="star" *ngIf="platoListo">
+      <img [src]="fotoPlato" [alt]="plato.nombre">
+      <div><small>⭐ Plato estrella</small><h3>{{ plato.nombre }}</h3><p>{{ plato.tipo }}</p><p>{{ plato.ingrediente }}</p><div><a routerLink="/comidas" class="btn o">Ver comidas</a></div></div>
+    </article>
+    <div class="sk" *ngIf="platoCargando"></div>
+    <article class="star" *ngIf="bebidaLista">
+      <img [src]="fotoBebida" [alt]="bebida.nombre">
+      <div><small>⭐ Bebida estrella</small><h3>{{ bebida.nombre }}</h3><p>{{ bebida.tipo }}</p><p>{{ bebida.ingrediente }}</p><div><a routerLink="/bebidas" class="btn o">Ver bebidas</a></div></div>
+    </article>
+    <div class="sk" *ngIf="bebidaCargando"></div>
+  </section>
+</div>

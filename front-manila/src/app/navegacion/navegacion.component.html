@@ -1,0 +1,13 @@
+<header class="nav">
+  <a routerLink="/" class="logo">
+    <img src="assets/img/logo.png" alt="Logo MANILA">MANILA
+  </a>
+  <button class="burger" (click)="alternarMenu()" aria-label="Menú">☰</button>
+  <nav class="menu" [class.on]="abierto" (click)="cerrarMenu()">
+    <a routerLink="/" routerLinkActive="activo" [routerLinkActiveOptions]="opcionesInicio">Inicio</a>
+    <a routerLink="/comidas" routerLinkActive="activo">Comidas</a>
+    <a routerLink="/bebidas" routerLinkActive="activo">Bebidas</a>
+    <a routerLink="/pedido" routerLinkActive="activo">Pedido <em *ngIf="hayProductos()">{{ contar() }}</em></a>
+    <a routerLink="/juego" routerLinkActive="activo">Juego</a>
+  </nav>
+</header>

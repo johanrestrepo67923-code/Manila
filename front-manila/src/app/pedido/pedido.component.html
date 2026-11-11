@@ -1,0 +1,65 @@
+<div class="wrap">
+  <div class="sec-t"><small>Tu mesa</small><h1>Realizar pedido</h1><i></i></div>
+
+  
+  <section class="tk" *ngIf="verFactura">
+    <h3>MANILA</h3>
+    <p class="subtitulo">FORMATO DE PEDIDO</p>
+    <hr>
+    <div class="r"><span>N.º {{ factura.numero }}</span><span>{{ factura.fecha }}</span></div>
+    <hr>
+    <div class="r"><b>Cliente</b><span>{{ factura.cliente.nombre }}</span></div>
+    <div class="r"><b>Celular</b><span>{{ factura.cliente.telefono }}</span></div>
+    <div class="r"><b>Dirección</b><span>{{ factura.cliente.direccion }}</span></div>
+    <hr>
+    <div class="r" *ngFor="let p of factura.lista"><span>{{ p.cantidad }} × {{ p.nombre }}</span><span>{{ subtotal(p) }}</span></div>
+    <hr>
+    <div class="r total"><span>TOTAL A PAGAR</span><span>{{ formato(factura.total) }}</span></div>
+    <div class="acc">
+      <button class="btn" (click)="descargarPDF()">⬇ Descargar PDF</button>
+      <button class="btn o btn-nuevo" (click)="nuevoPedido()">Nuevo pedido</button>
+    </div>
+  </section>
+
+  <div class="ped" *ngIf="verFormulario">
+    <div class="box">
+      <h3>Tu pedido</h3>
+
+      <div class="ln" *ngFor="let p of lista()">
+        <img [src]="p.foto" [alt]="p.nombre">
+        <div><b>{{ p.nombre }}</b><small>{{ formato(p.precio) }} c/u</small></div>
+        <div class="acciones">
+          <div class="qty"><button (click)="restar(p)">−</button><b>{{ p.cantidad }}</b><button (click)="sumar(p)">+</button></div>
+          <button type="button" class="quitar" (click)="quitar(p)">Quitar</button>
+        </div>
+      </div>
+
+      <div class="vacio pedido-vacio" *ngIf="pedidoVacio()">
+        <p>Aún no has agregado nada.</p>
+        <div class="botones"><a routerLink="/comidas" class="btn o">Ver comidas</a><a routerLink="/bebidas" class="btn o">Ver bebidas</a></div>
+      </div>
+
+      <div class="tot"><span>Total</span><span>{{ formato(calcularTotal()) }}</span></div>
+    </div>
+
+  
+    <div class="box">
+      <h3>Tus datos</h3>
+
+      <label class="fld"><span>Nombre completo</span>
+        <input type="text" [(ngModel)]="pedido.nombre" name="nombre" placeholder="Nombre y apellido">
+      </label>
+
+      <label class="fld"><span>Celular</span>
+        <input type="text" [(ngModel)]="pedido.telefono" name="telefono" placeholder="3124383221">
+      </label>
+
+      <label class="fld"><span>Dirección</span>
+        <input type="text" [(ngModel)]="pedido.direccion" name="direccion" placeholder="Calle, número, barrio">
+      </label>
+
+      <p class="err" *ngIf="mensaje">{{ mensaje }}</p>
+      <button type="button" class="btn btn-pedido" (click)="realizarPedido()">Realizar pedido</button>
+    </div>
+  </div>
+</div>

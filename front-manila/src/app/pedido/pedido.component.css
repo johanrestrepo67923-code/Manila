@@ -1,0 +1,18 @@
+:host{display:block}
+
+/* formato de pedido (ticket) */
+.subtitulo{text-align:center;margin:0;font-size:.75rem;letter-spacing:.3em}
+.tk .total{font:700 1.5rem var(--serif)}
+.acc .btn-nuevo{color:#1b1f2a;border-color:#8a7545}
+
+/* lista del pedido: cantidad y botón "Quitar" */
+.acciones{text-align:right}
+.quitar{background:none;border:0;padding:0;margin-top:4px;font:inherit;font-size:.8em;color:#ff8b8b;cursor:pointer}
+
+/* mensaje cuando el pedido está vacío */
+.pedido-vacio{padding:30px 0}
+.pedido-vacio p{margin:0 0 20px}
+.botones{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+
+/* botón "Realizar pedido" */
+.btn-pedido{width:100%}

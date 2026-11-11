@@ -1,0 +1,10 @@
+:host{display:block}
+
+/* logo del pie de página */
+.logo-pie{font-size:1.5rem}
+
+.descripcion{margin-top:12px}
+
+/* botón "Pedir ahora" */
+.btn-pedir{margin-top:8px;color:#1a1306;display:inline-block}
+.btn-pedir:hover{color:#1a1306}

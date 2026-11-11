@@ -1,0 +1,21 @@
+<div class="wrap">
+  <div class="sec-t"><small>Entretenimiento</small><h1>Encuentra el plato y la bebida</h1><i></i></div>
+
+  <div class="hud"><span>Ronda<b>{{ ronda }}</b></span><span>Intentos<b>{{ intentos }}</b></span></div>
+  <p class="msg">{{ mensaje }}</p>
+
+  <div class="jg">
+    <button class="cel" *ngFor="let c of celdas" [class.v]="c.abierta" [class.ok]="c.especial" (click)="elegir(c)">
+      <div>
+        <span class="f">{{ c.numero }}</span>
+        <span class="b">
+          <img *ngIf="c.esPlato" [src]="imgPlato" alt="Plato">
+          <img *ngIf="c.esBebida" [src]="imgBebida" alt="Bebida">
+          <ng-container *ngIf="c.vacia">🍃</ng-container>
+        </span>
+      </div>
+    </button>
+  </div>
+
+  <div class="reiniciar"><button class="btn o" (click)="reiniciar()">Reiniciar juego</button></div>
+</div>
